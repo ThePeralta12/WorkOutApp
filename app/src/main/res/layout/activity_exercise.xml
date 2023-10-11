@@ -65,13 +65,35 @@
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                tools:text="10"
-
-                />
+                tools:text="10" />
         </LinearLayout>
-
-
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvUpcomingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upcoming_exercise"
+        android:textColor="@color/green"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvUpcomingExercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flRestView"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvUpcomingExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/darkGray"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUpcomingLabel"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/ivImage"
@@ -87,7 +109,7 @@
         android:id="@+id/tvExerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ExerciseName"
+        android:text="@string/exerciseName"
         android:textColor="@color/green"
         android:textSize="22sp"
         android:textStyle="bold"

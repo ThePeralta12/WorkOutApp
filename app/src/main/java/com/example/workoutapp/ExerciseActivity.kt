@@ -47,11 +47,15 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.tvExerciseName?.visibility = View.INVISIBLE
         binding?.flExerciseView?.visibility = View.INVISIBLE
         binding?.ivImage?.visibility = View.INVISIBLE
+        binding?.tvUpcomingLabel?.visibility = View.VISIBLE
+        binding?.tvUpcomingExercise?.visibility = View.VISIBLE
 
         if (restTimer != null) {
             restTimer?.cancel()
             restProgress = 0
         }
+
+        binding?.tvUpcomingExercise?.text = exerciseList!![currentExercisePosition + 1].getName()
 
         setRestProgressBar()
     }
@@ -62,6 +66,8 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.tvExerciseName?.visibility = View.VISIBLE
         binding?.flExerciseView?.visibility = View.VISIBLE
         binding?.ivImage?.visibility = View.VISIBLE
+        binding?.tvUpcomingLabel?.visibility = View.INVISIBLE
+        binding?.tvUpcomingExercise?.visibility = View.INVISIBLE
 
 
         if (exerciseTimer != null) {
