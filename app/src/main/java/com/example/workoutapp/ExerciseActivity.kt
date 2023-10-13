@@ -1,5 +1,7 @@
 package com.example.workoutapp
 
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,7 +10,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.workoutapp.databinding.ActivityExerciseBinding
-import org.w3c.dom.Text
 import java.util.Locale
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -27,6 +28,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition = -1
 
     private var tts: TextToSpeech? = null
+
+    private var player: MediaPlayer? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,18 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setupRestView() {
+
+
+        try {
+            val soundURI = Uri.parse(
+                "android.resource://com.example.workoutapp/" + R.raw.press_start
+            )
+            player = MediaPlayer.create(applicationContext, soundURI)
+            player?.isLooping = false
+            player?.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         binding?.flRestView?.visibility = View.VISIBLE
         binding?.tvTitle?.visibility = View.VISIBLE
@@ -123,6 +139,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
+
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
                     setupRestView()
                 } else {
@@ -131,6 +148,18 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                         "Congrats! You've completed the workouts!",
                         Toast.LENGTH_SHORT
                     ).show()
+
+                    try {
+                        val soundURI = Uri.parse(
+                            "android.resource://com.example.workoutapp/" + R.raw.finished
+                        )
+                        player = MediaPlayer.create(applicationContext, soundURI)
+                        player?.isLooping = false
+                        player?.start()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 }
             }
         }.start()
@@ -149,14 +178,17 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
-
-
 //        Shutting down the Text to Speech feature when activity is destroyed
 //        START
         if (tts != null) {
             tts!!.stop()
             tts!!.shutdown()
         }
+
+        if (player != null) {
+            player!!.stop()
+        }
+
 
         binding = null
 
