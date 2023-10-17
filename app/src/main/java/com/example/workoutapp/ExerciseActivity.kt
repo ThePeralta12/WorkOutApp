@@ -1,5 +1,6 @@
 package com.example.workoutapp
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -16,23 +17,19 @@ import java.util.Locale
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var binding: ActivityExerciseBinding? = null
-
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
     private var tenSecondTimer = 10
-
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
     private var thirtySecondTimer = 30
-
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
-
     private var tts: TextToSpeech? = null
-
     private var player: MediaPlayer? = null
-
     private var exerciseAdapter: ExerciseStatusAdapter? = null
+    private var restTimerDuration: Long = 1
+    private var exerciseTimerDuration: Long = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,7 +122,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
 
-        restTimer = object : CountDownTimer(10000, 1000) {
+        restTimer = object : CountDownTimer(restTimerDuration * 1000, 1000) {
             override fun onTick(p0: Long) {
                 restProgress++
                 binding?.progressBar?.progress = tenSecondTimer - restProgress
@@ -146,7 +143,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgressBar() {
         binding?.progressBarExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(30000, 1000) {
+        exerciseTimer = object : CountDownTimer(exerciseTimerDuration * 1000, 1000) {
             override fun onTick(p0: Long) {
                 exerciseProgress++
                 binding?.progressBarExercise?.progress = thirtySecondTimer - exerciseProgress
@@ -168,6 +165,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                         "Congrats! You've completed the workouts!",
                         Toast.LENGTH_SHORT
                     ).show()
+                    finish()
+                    val intent = Intent(this@ExerciseActivity, FinishActivity::class.java)
+                    startActivity(intent)
 
                     try {
                         val soundURI = Uri.parse(

@@ -31,7 +31,7 @@ object Constants {
         exerciseList.add(highKneesRunningInPlace)
         val lunge = ExerciseModel(
             4,
-            "Lunge",
+            "Lunges",
             R.drawable.ic_lunge,
             false,
             false
@@ -101,7 +101,7 @@ object Constants {
 
         val wallSit = ExerciseModel(
             12,
-            "Wall sit",
+            "Wall Sit",
             R.drawable.ic_wall_sit,
             false,
             false
