@@ -11,4 +11,6 @@
     <string name="you_have_completed_the_workout">You have completed the workout!</string>
     <string name="bt_finish">FINISH</string>
     <string name="exericsename">exericseName</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="Confirmation">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
 </resources>
