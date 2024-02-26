@@ -146,6 +146,7 @@ class BMIActivity : AppCompatActivity() {
         binding?.llDiplayBMIResult?.visibility = View.INVISIBLE
     }
 
+
     /**
      * Function is used to validate the input values for METRIC UNITS.
      */
@@ -160,7 +161,7 @@ class BMIActivity : AppCompatActivity() {
 
         return isValid
     }
-    // END
+
 
 // TODO(Step 1 : Validating the US UNITS view input values.)
     // START
