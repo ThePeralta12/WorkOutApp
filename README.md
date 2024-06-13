@@ -1,4 +1,4 @@
-# WorkApp
+# WorkOutApp
 7 Min Workout App
 
 
